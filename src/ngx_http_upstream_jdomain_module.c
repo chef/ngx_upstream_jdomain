@@ -15,6 +15,7 @@
 #define NGX_JDOMAIN_ARG_STR_MAX_IPS "max_ips="
 #define NGX_JDOMAIN_ARG_STR_PORT "port="
 #define NGX_JDOMAIN_ARG_STR_STRICT "strict"
+#define NGX_JDOMAIN_ARG_STR_MAX_FAILS "max_fails="
 
 typedef struct
 {
@@ -551,6 +552,15 @@ ngx_http_upstream_jdomain(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 			continue;
 		}
 
+		arglen = ngx_strlen(NGX_JDOMAIN_ARG_STR_MAX_FAILS);
+		if (ngx_strncmp(value[i].data, NGX_JDOMAIN_ARG_STR_MAX_FAILS, arglen) == 0) {
+			num = ngx_atoi(value[i].data + arglen, value[i].len - arglen);
+			if (num < 1) {
+				goto invalid;
+			}
+			server->max_fails = num;
+			continue;
+		}
 		goto invalid;
 	}
 
