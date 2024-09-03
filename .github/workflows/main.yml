@@ -100,7 +100,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Download Artifacts
         if: ${{ env.GITHUB_ACTIONS_ENVIRONMENT != 'local' }}
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: nginx-${{ matrix.imageBase }}-${{ matrix.nginxVersion }}
           path: bin
@@ -130,7 +130,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Download Artifacts
         if: ${{ env.GITHUB_ACTIONS_ENVIRONMENT != 'local' }}
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: nginx-${{ matrix.imageBase }}-${{ matrix.nginxVersion }}
           path: bin
